@@ -4,11 +4,6 @@ import {
   Body, Button, Card, CardItem, Container, Content, Footer, FooterTab, Header, Icon, Left, Right, Root, Text, Title,
   Toast
 } from "native-base"
-import { Constants } from "expo"
-
-const statusBarStyle = StyleSheet.create({
-  marginTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight,
-})
 
 export default class Result extends React.Component {
   static navigationOptions = ({navigation}) => ({

@@ -4,5 +4,7 @@
     "androidStatusBar": {
       "backgroundColor": "#C2185B"
     }
-  }
+  },
+  "name": "mobilepasswordcreator",
+  "displayName": "Password Creator"
 }

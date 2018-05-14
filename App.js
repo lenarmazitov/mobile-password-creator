@@ -1,16 +1,14 @@
 import React from 'react'
 import Main from "./src/Main"
 import { StackNavigator } from 'react-navigation'
-import { Constants } from "expo"
 import allReducers from "./src/reducers"
 import { Provider } from "react-redux"
 import { applyMiddleware, createStore } from "redux"
-import Expo from "expo"
 import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from "remote-redux-devtools"
 import Result from "./src/Result"
 import { Platform, SafeAreaView } from "react-native"
-import { Root } from "native-base"
+import { Root, View } from "native-base"
 
 const middleware = [createSagaMiddleware()]
 const store = createStore(allReducers, composeWithDevTools(
@@ -23,11 +21,6 @@ const AppNavigator = StackNavigator({
   Result: {screen: Result}
 }, {
   initialRouteName: 'Main',
-  // cardStyle: {
-    // marginTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight,
-  // },
-  // navigationOptions: {
-  // }
 })
 
 console.ignoredYellowBox = [
@@ -44,25 +37,19 @@ export default class App extends React.Component {
   }
 
   async componentWillMount() {
-    await Expo.Font.loadAsync({
-      'Roboto': require('native-base/Fonts/Roboto.ttf'),
-      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-    })
     this.setState({isReady: true})
   }
 
   render() {
     if (!this.state.isReady) {
-      return <Expo.AppLoading/>
+      return <View>Loading...</View>
     }
 
     return (
       <Provider store={store}>
-        <SafeAreaView style={{flex: 1, backgroundColor: '#000000', paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight}}>
-          <Root>
-            <AppNavigator/>
-          </Root>
-        </SafeAreaView>
+        <Root>
+          <AppNavigator/>
+        </Root>
       </Provider>
     )
   }
